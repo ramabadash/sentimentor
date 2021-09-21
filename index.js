@@ -2,7 +2,7 @@
 document.querySelector("button").addEventListener("click", sentimentor);
 
 async function sentimentor (event){
-    
+
     const loaderElem = document.getElementById("loader");
     const typeElem = document.getElementById("type");
     const polarityElem = document.getElementById("polarity");
@@ -28,7 +28,8 @@ async function sentimentor (event){
 
         //Got an answer
         if (response.ok) {
-            answerColor (typeElem, polarityElem);
+            const answerType = data.result.type;
+            answerColor (answerType, typeElem, polarityElem);
             loaderElem.style.display = "none"; //unloading
             //Show answer
             typeElem.textContent = `Type: ${data.result.type}`;
@@ -44,11 +45,11 @@ async function sentimentor (event){
 
 /* ASSIST FUNCTIONS */
 //Text color base on the answer 
-function answerColor (typeElem, polarityElem){
-    if (data.result.type === "positive") {
+async function answerColor (answerType, typeElem, polarityElem) {
+    if (answerType === "positive") {
         typeElem.style.color = "green";
         polarityElem.style.color = "green"; 
-    } else if (data.result.type === "negative"){
+    } else if (answerType === "negative"){
         typeElem.style.color = "red";
         polarityElem.style.color = "red"; 
     } else {
@@ -57,7 +58,7 @@ function answerColor (typeElem, polarityElem){
     }
 }
 //display "cat status"
-function catImg (status) {
+async function catImg (status) {
     const statusElem = document.getElementById("status");
     const catImgElem = document.getElementById("catImg");
 
@@ -66,7 +67,7 @@ function catImg (status) {
     catImgElem.src = `https://http.cat/${status}`;
 }
 
-function resetLayout (typeElem, polarityElem, errorElem) {
+async function resetLayout (typeElem, polarityElem, errorElem) {
     typeElem.textContent = "";
     polarityElem.textContent = "";
     errorElem.textContent = "";
