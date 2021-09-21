@@ -2,6 +2,7 @@
 document.querySelector("button").addEventListener("click", sentimentor);
 
 async function sentimentor (event){
+    
     const loaderElem = document.getElementById("loader");
     const typeElem = document.getElementById("type");
     const polarityElem = document.getElementById("polarity");
@@ -27,17 +28,7 @@ async function sentimentor (event){
 
         //Got an answer
         if (response.ok) {
-            if (data.result.type === "positive") {
-                typeElem.style.color = "green";
-                polarityElem.style.color = "green"; 
-            } else if (data.result.type === "negative"){
-                typeElem.style.color = "red";
-                polarityElem.style.color = "red"; 
-            } else {
-                typeElem.style.color = "grey";
-                polarityElem.style.color = "grey";
-            }
-            
+            answerColor (typeElem, polarityElem);
             loaderElem.style.display = "none"; //unloading
             //Show answer
             typeElem.textContent = `Type: ${data.result.type}`;
@@ -49,8 +40,24 @@ async function sentimentor (event){
         errorElem.textContent = `Sorry we could not find an answer for you! try again`;
     }
 }
+
+
+/* ASSIST FUNCTIONS */
+//Text color base on the answer 
+function answerColor (typeElem, polarityElem){
+    if (data.result.type === "positive") {
+        typeElem.style.color = "green";
+        polarityElem.style.color = "green"; 
+    } else if (data.result.type === "negative"){
+        typeElem.style.color = "red";
+        polarityElem.style.color = "red"; 
+    } else {
+        typeElem.style.color = "grey";
+        polarityElem.style.color = "grey";
+    }
+}
 //display "cat status"
-async function catImg (status) {
+function catImg (status) {
     const statusElem = document.getElementById("status");
     const catImgElem = document.getElementById("catImg");
 
