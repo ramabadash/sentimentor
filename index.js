@@ -9,7 +9,7 @@ async function sentimentor (event){
     resetLayout (typeElem, polarityElem, errorElem);
 
     try {
-        loaderElem.style.display = "block"; //loading
+        loaderElem.style.display = "block"; //diaplay loading
 
         const response = await fetch("https://sentim-api.herokuapp.com/api/v1/", {
             headers: {
@@ -21,10 +21,12 @@ async function sentimentor (event){
               text: document.getElementById("input").value,
             }),
           });
+        catImg (response.status); //Show cat status
+
         const data = await response.json();
 
         //Got an answer
-        if (response.ok){
+        if (response.ok) {
             if (data.result.type === "positive") {
                 typeElem.style.color = "green";
                 polarityElem.style.color = "green"; 
@@ -40,15 +42,14 @@ async function sentimentor (event){
             //Show answer
             typeElem.textContent = `Type: ${data.result.type}`;
             polarityElem.textContent = `Polarity: ${data.result.polarity}`;
-            catImg (response.status); //Show cat status
-
         }
+
     } catch (error) {
         loaderElem.style.display = "none"; //unloading
         errorElem.textContent = `Sorry we could not find an answer for you! try again`;
     }
 }
-
+//display "cat status"
 async function catImg (status) {
     const statusElem = document.getElementById("status");
     const catImgElem = document.getElementById("catImg");
