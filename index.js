@@ -2,9 +2,13 @@
 document.querySelector("button").addEventListener("click", sentimentor);
 
 async function sentimentor (event){
+    const loaderElem = document.getElementById("loader");
+    const typeElem = document.getElementById("type");
+    const polarityElem = document.getElementById("polarity");
+    const errorElem = document.getElementById("error");
     try {
-        //loading
-        document.getElementById("loader").style.display = "block";
+        loaderElem.style.display = "block"; //loading
+
         const response = await fetch("https://sentim-api.herokuapp.com/api/v1/", {
             headers: {
               Accept: "application/json",
@@ -20,24 +24,23 @@ async function sentimentor (event){
         //Got an answer
         if (response.ok){
             if (data.result.type === "positive") {
-                document.getElementById("type").style.color = "green";
-                document.getElementById("polarity").style.color = "green"; 
+                typeElem.style.color = "green";
+                polarityElem.style.color = "green"; 
             } else if (data.result.type === "negative"){
-                document.getElementById("type").style.color = "red";
-                document.getElementById("polarity").style.color = "red"; 
+                typeElem.style.color = "red";
+                polarityElem.style.color = "red"; 
             } else {
-                document.getElementById("type").style.color = "grey";
-                document.getElementById("polarity").style.color = "grey";
+                typeElem.style.color = "grey";
+                polarityElem.style.color = "grey";
             }
-            //unloading
-            document.getElementById("loader").style.display = "none"
+            
+            loaderElem.style.display = "none"; //unloading
             //Show answer
-            document.getElementById("type").textContent = `Type: ${data.result.type}`;
-            document.getElementById("polarity").textContent = `Polarity: ${data.result.polarity}`;
+            typeElem.textContent = `Type: ${data.result.type}`;
+            polarityElem.textContent = `Polarity: ${data.result.polarity}`;
         }
     } catch (error) {
-        //unloading
-        document.getElementById("loader").style.display = "none"
-        document.getElementById("error").textContent = `Sorry we could not find an answer for you! try again`;
+        loaderElem.style.display = "none"; //unloading
+        errorElem.textContent = `Sorry we could not find an answer for you! try again`;
     }
 }
