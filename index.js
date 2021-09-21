@@ -6,6 +6,8 @@ async function sentimentor (event){
     const typeElem = document.getElementById("type");
     const polarityElem = document.getElementById("polarity");
     const errorElem = document.getElementById("error");
+    resetLayout (typeElem, polarityElem, errorElem);
+
     try {
         loaderElem.style.display = "block"; //loading
 
@@ -38,9 +40,28 @@ async function sentimentor (event){
             //Show answer
             typeElem.textContent = `Type: ${data.result.type}`;
             polarityElem.textContent = `Polarity: ${data.result.polarity}`;
+            catImg (response.status); //Show cat status
+
         }
     } catch (error) {
         loaderElem.style.display = "none"; //unloading
         errorElem.textContent = `Sorry we could not find an answer for you! try again`;
     }
+}
+
+async function catImg (status) {
+    const statusElem = document.getElementById("status");
+    const catImgElem = document.getElementById("catImg");
+
+    statusElem.textContent = `Status: ${status}`;
+    catImgElem.style.display = "block";
+    catImgElem.src = `https://http.cat/${status}`;
+}
+
+function resetLayout (typeElem, polarityElem, errorElem) {
+    typeElem.textContent = "";
+    polarityElem.textContent = "";
+    errorElem.textContent = "";
+    document.getElementById("status").textContent = "";
+    document.getElementById("catImg").style.display = "none";
 }

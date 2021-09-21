@@ -35,6 +35,12 @@ button {
     border-style: solid;
     border-color: lightslategrey;
 }
+
+img {
+    display: none;
+    width: 200px;
+    height: 200px;
+}
 /*START LOADER*/
 .loader{
     display: none;
