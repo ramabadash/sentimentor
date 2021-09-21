@@ -1,12 +1,41 @@
+* {
+    margin: 15px;
+}
 body{
+    font-family: Gluten;
+    font-size: 30px;
 	background-color: indianred;
 	padding: 0;
-	margin: 10px;
+	margin: 20px;
 	display:block;
 	align-items: center;
 	justify-content: center;
 }
 
+input {
+    font-family: Gluten;
+    width: 50%;
+    height: 100px;
+    padding: 5px;
+    border-width: 5px;
+    background-color: lavenderblush;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightslategrey;
+}
+
+button {
+    font-family: Gluten;
+    font-size: 20px;
+    width: 50%;
+    height: 100%;
+    border-width: 5px;
+    background-color: lavenderblush;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightslategrey;
+}
+/*START LOADER*/
 .loader{
     display: none;
 	-webkit-perspective:700px;
@@ -14,7 +43,7 @@ body{
 }
 
 .loader>span{
-	font-size: 50px;
+	font-size: 30px;
 	font-family: "franklin gothic medium",sans-serif;
 	display: inline-block;
 	animation:flip 2.6s infinite linear;
