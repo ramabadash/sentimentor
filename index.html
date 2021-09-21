@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
     <title>Sentimentor</title>
 </head>
 <body>
@@ -13,7 +14,15 @@
     <input type="textarea" id="input" name="text" placeholder="Youre text here..."></br>
     <button>Chek sentiment</button>
     <div id="result">
-        <div id="loader"></div>
+        <div id="loader" class="loader">
+            <span>L</span>
+			<span>O</span>
+			<span>A</span>
+			<span>D</span>
+			<span>I</span>
+			<span>N</span>
+			<span>G</span>
+        </div>
         <span id="polarity"></span></br>
         <span id="type"></span></br>
         <span id="error"></span>

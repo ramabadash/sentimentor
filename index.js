@@ -3,6 +3,8 @@ document.querySelector("button").addEventListener("click", sentimentor);
 
 async function sentimentor (event){
     try {
+        //loading
+        document.getElementById("loader").style.display = "block";
         const response = await fetch("https://sentim-api.herokuapp.com/api/v1/", {
             headers: {
               Accept: "application/json",
@@ -14,7 +16,7 @@ async function sentimentor (event){
             }),
           });
         const data = await response.json();
-        
+
         //Got an answer
         if (response.ok){
             if (data.result.type === "positive") {
@@ -27,10 +29,15 @@ async function sentimentor (event){
                 document.getElementById("type").style.color = "grey";
                 document.getElementById("polarity").style.color = "grey";
             }
+            //unloading
+            document.getElementById("loader").style.display = "none"
+            //Show answer
             document.getElementById("type").textContent = `Type: ${data.result.type}`;
             document.getElementById("polarity").textContent = `Polarity: ${data.result.polarity}`;
         }
     } catch (error) {
+        //unloading
+        document.getElementById("loader").style.display = "none"
         document.getElementById("error").textContent = `Sorry we could not find an answer for you! try again`;
     }
 }
